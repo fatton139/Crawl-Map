@@ -161,5 +161,16 @@ public class Room implements Serializable {
      */
     public static void makeExitPair(Room room1, Room room2, String label1,
             String label2) throws ExitExistsException, NullRoomException {
+        if (room1 == null || room2 == null)
+            throw new NullRoomException();
+        if (room1.getExits().containsKey(label1) ||
+                room2.getExits().containsKey(label2)) {
+            throw new ExitExistsException();
+        }
+        if (label1 == null || label2 == null)
+            throw new NullPointerException();
+
+        room1.addExit(label1, room2);
+        room2.addExit(label2, room1);
     }
 }
