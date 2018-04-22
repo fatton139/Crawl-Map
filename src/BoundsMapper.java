@@ -20,6 +20,33 @@ public class BoundsMapper extends MapWalker {
         return false;
     }
 
+    @Override
+    protected void visit(Room room) {
+        if (!hasVisitedNeighbours(room))
+            coords.put(room, new Pair(0, 0));
+        else {
+            Map<String, Room> exits = room.getExits();
+            for (String exitName:exits.keySet()) {
+                Pair position = coords.get(exits.get(exitName));
+                switch (exitName) {
+                    case "North":
+                        coords.put(room, new Pair(position.x, position.y - 1));
+                        break;
+                    case "South":
+                        coords.put(room, new Pair(position.x, position.y + 1));
+                        break;
+                    case "East":
+                        coords.put(room, new Pair(position.x - 1, position.y));
+                        break;
+                    case "West":
+                        coords.put(room, new Pair(position.x + 1, position.y));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 
     @Override
     public void reset() {}
