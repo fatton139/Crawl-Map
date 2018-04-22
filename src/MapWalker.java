@@ -11,6 +11,19 @@ public class MapWalker {
     protected void reset() {}
 
     public void walk() {
+        this.roomsToWalk.add(this.startRoom);
+        while (!roomsToWalk.isEmpty()) {
+            Room cursor = this.roomsToWalk.get(0);
+            this.roomsToWalk.remove(0);
+            if (!hasVisited(cursor)) {
+                for (String exitName: cursor.getExits().keySet()) {
+                    if (!this.hasVisited(cursor.getExits().get(exitName)))
+                        this.roomsToWalk.add(cursor.getExits().get(exitName));
+                }
+                this.visit(cursor);
+                this.visitedRooms.add(cursor);
+            }
+        }
     }
 
     public boolean hasVisited(Room room) {
