@@ -27,23 +27,27 @@ public class BoundsMapper extends MapWalker {
         else {
             Map<String, Room> exits = room.getExits();
             for (String exitName:exits.keySet()) {
-                Pair position = coords.get(exits.get(exitName));
-                switch (exitName) {
-                    case "North":
-                        coords.put(room, new Pair(position.x, position.y - 1));
-                        break;
-                    case "South":
-                        coords.put(room, new Pair(position.x, position.y + 1));
-                        break;
-                    case "East":
-                        coords.put(room, new Pair(position.x - 1, position.y));
-                        break;
-                    case "West":
-                        coords.put(room, new Pair(position.x + 1, position.y));
-                        break;
-                    default:
-                        break;
+                if (coords.containsKey(exits.get(exitName))) {
+                    Pair position = coords.get(exits.get(exitName));
+                    switch (exitName) {
+                        case "North":
+                            coords.put(room, new Pair(position.x, position.y - 1));
+                            break;
+                        case "South":
+                            coords.put(room, new Pair(position.x, position.y + 1));
+                            break;
+                        case "East":
+                            coords.put(room, new Pair(position.x - 1, position.y));
+                            break;
+                        case "West":
+                            System.out.println(position.y);
+                            coords.put(room, new Pair(position.x + 1, position.y));
+                            break;
+                        default:
+                            break;
+                    }
                 }
+
             }
         }
     }
