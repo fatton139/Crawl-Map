@@ -69,6 +69,7 @@ public class BoundsMapper extends MapWalker {
 
     @Override
     public void reset() {
+        super.reset();
         this.coords = new HashMap<>();
         this.xMax = 0;
         this.yMax = 0;
