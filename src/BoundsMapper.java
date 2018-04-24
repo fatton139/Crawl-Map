@@ -31,17 +31,32 @@ public class BoundsMapper extends MapWalker {
                     Pair position = coords.get(exits.get(exitName));
                     switch (exitName) {
                         case "North":
-                            coords.put(room, new Pair(position.x, position.y - 1));
+                            coords.put(room, new Pair(position.x,
+                                    position.y - 1));
+                            if (position.y - 1 < this.yMin) {
+                                this.yMin = position.y - 1;
+                            }
                             break;
                         case "South":
-                            coords.put(room, new Pair(position.x, position.y + 1));
+                            coords.put(room, new Pair(position.x,
+                                    position.y + 1));
+                            if (position.y + 1 > this.yMax) {
+                                this.yMax = position.y + 1;
+                            }
                             break;
                         case "East":
-                            coords.put(room, new Pair(position.x - 1, position.y));
+                            coords.put(room, new Pair(position.x - 1,
+                                    position.y));
+                            if (position.x - 1 < this.xMin) {
+                                this.xMin = position.x - 1;
+                            }
                             break;
                         case "West":
-                            System.out.println(position.y);
-                            coords.put(room, new Pair(position.x + 1, position.y));
+                            coords.put(room, new Pair(position.x + 1,
+                                    position.y));
+                            if (position.x + 1 > this.xMax) {
+                                this.xMax = position.x + 1;
+                            }
                             break;
                         default:
                             break;
