@@ -10,21 +10,20 @@ public class Critter extends Thing implements Lootable, Mob {
     // Current health of this Mob.
     private int health;
     // Default health (used if alive is set back to true).
-    private int startHealth;
+    private int MAX_HEALTH = 10;
 
     /**
      * Critter - A non-player Lootable Mob.
      * @param shortDescription Name or short description for this Mob
      * @param longDescription  Longer description for this Mob
      * @param value     Worth of Mob when looted
-     * @param health    starting (and max) health of Mob
+     * @param health    Starting health of Mob
      */
     public Critter(String shortDescription, String longDescription,
                    double value, int health) {
         super(shortDescription, longDescription);
         this.value = value;
         this.health = health;
-        this.startHealth = health;
     }
 
     /**
@@ -100,12 +99,12 @@ public class Critter extends Thing implements Lootable, Mob {
     }
 
     /**
-     * If true, set health to starting health.
+     * If true, set health to MAX_HEALTH.
      * @see Critter#Critter(String, String, double, int)
      */
     @Override
     public void setAlive(boolean alive) {
-        health = (alive ? startHealth : 0);
+        health = (alive ? MAX_HEALTH : 0);
     }
 
     /**

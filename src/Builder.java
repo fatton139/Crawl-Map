@@ -40,17 +40,4 @@ public class Builder extends Player {
     public void takeDamage(int amount) {
     }
 
-    /**
-     * Create a new exit to the specified Room.
-     *
-     * @param destination   Room to connect to
-     * @param direction     North/South/East/West
-     * @throws DigException if there is already a Room in that position or the
-     *         direction is unavailable.
-     * @throws NullPointerException if either argument is null
-     */
-    public void digExit(Room destination, String direction) 
-            throws DigException {
-    }
-
 }

@@ -33,7 +33,7 @@ public abstract class Player extends Thing implements Mob {
      * A player with a defined health.
      * @param shortDescription A short name or description for the Player
      * @param longDescription A more detailed description for the Player
-     * @param health The max and starting health for the Player
+     * @param health The starting health for the Player
      * @see Thing#Thing
      */
     public Player(String shortDescription, String longDescription, int health) {

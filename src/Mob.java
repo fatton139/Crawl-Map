@@ -29,7 +29,7 @@ public interface Mob {
     /**
      * Set this Mob's status.
      * Note: setting a Mob back to alive will set its
-     *              health back to its starting/max health. Setting a Mob with
+     *              health back to its max health. Setting a Mob with
      *              &gt;0 health to false will set its health to 0.     
      *
      * @param alive life status 

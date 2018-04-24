@@ -27,7 +27,7 @@ public class Explorer extends Player {
      * Create an Explorer with a set health.
      * @param shortDescription A short name or description for the Explorer
      * @param longDescription A more detailed description for the Explorer
-     * @param health Initial and Max health for the Explorer.
+     * @param health Starting health for the Explorer.
      */
     public Explorer(String shortDescription, String longDescription, int health) {
         super(shortDescription, longDescription, health);
@@ -38,4 +38,14 @@ public class Explorer extends Player {
         return getLong() + (isAlive()
                 ? " with " + getHealth() + " health" : "(fainted)");
     }
+
+    /**
+    * @return 1
+    * @inheritDoc
+    */
+    @Override
+    public int getDamage() {
+        return 1;
+    }
+
 }
