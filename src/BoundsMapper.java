@@ -68,5 +68,11 @@ public class BoundsMapper extends MapWalker {
     }
 
     @Override
-    public void reset() {}
+    public void reset() {
+        this.coords = new HashMap<>();
+        this.xMax = 0;
+        this.yMax = 0;
+        this.xMin = 0;
+        this.yMin = 0;
+    }
 }

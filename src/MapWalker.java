@@ -8,7 +8,11 @@ public class MapWalker {
         this.startRoom = start;
     }
 
-    protected void reset() {}
+    protected void reset() {
+        this.visitedRooms = new ArrayList<>();
+        this.roomsToWalk = new ArrayList<>();
+        this.startRoom = null;
+    }
 
     public void walk() {
         this.roomsToWalk.add(this.startRoom);
