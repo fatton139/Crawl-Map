@@ -40,4 +40,7 @@ public class Builder extends Player {
     public void takeDamage(int amount) {
     }
 
+    public String repr() {
+        return "";
+    }
 }

@@ -38,4 +38,8 @@ public class Treasure extends Thing implements Lootable {
     public boolean canLoot(Thing looter) {
         return looter instanceof Player;
     }
+
+    public String repr() {
+        return "";
+    }
 }

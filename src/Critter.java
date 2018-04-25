@@ -114,4 +114,8 @@ public class Critter extends Thing implements Lootable, Mob {
     public int getHealth() {
         return health;
     }
+
+    public String repr() {
+        return "";
+    }
 }

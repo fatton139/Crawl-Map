@@ -48,4 +48,7 @@ public class Explorer extends Player {
         return 1;
     }
 
+    public String repr() {
+        return "";
+    }
 }
