@@ -49,6 +49,7 @@ public class Explorer extends Player {
     }
 
     public String repr() {
-        return "";
+        return "E;" + Integer.toString(this.getHealth()) + ";" + this
+                .getShort() + ";" + this.getLong();
     }
 }

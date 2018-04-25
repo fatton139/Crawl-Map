@@ -41,6 +41,6 @@ public class Builder extends Player {
     }
 
     public String repr() {
-        return "";
+        return "B;" + this.getShort() + ";" + this.getLong() ;
     }
 }

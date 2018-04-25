@@ -40,6 +40,6 @@ public class Treasure extends Thing implements Lootable {
     }
 
     public String repr() {
-        return "";
+        return "$;" + Double.toString(this.value) + ";" + this.getShort() ;
     }
 }
