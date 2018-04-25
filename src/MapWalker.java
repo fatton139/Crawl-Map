@@ -11,10 +11,10 @@ public class MapWalker {
     protected void reset() {
         this.visitedRooms = new ArrayList<>();
         this.roomsToWalk = new ArrayList<>();
-        this.startRoom = null;
     }
 
     public void walk() {
+        this.reset();
         this.roomsToWalk.add(this.startRoom);
         while (!roomsToWalk.isEmpty()) {
             Room cursor = this.roomsToWalk.get(0);
@@ -25,7 +25,6 @@ public class MapWalker {
                         this.roomsToWalk.add(cursor.getExits().get(exitName));
                 }
                 this.visit(cursor);
-                this.visitedRooms.add(cursor);
             }
         }
     }
@@ -34,5 +33,7 @@ public class MapWalker {
         return this.visitedRooms.contains(room);
     }
 
-    protected void visit(Room room) {}
+    protected void visit(Room room) {
+        this.visitedRooms.add(room);
+    }
 }

@@ -25,6 +25,7 @@ public class BoundsMapper extends MapWalker {
         if (!hasVisitedNeighbours(room))
             coords.put(room, new Pair(0, 0));
         else {
+            super.visit(room);
             Map<String, Room> exits = room.getExits();
             for (String exitName:exits.keySet()) {
                 if (coords.containsKey(exits.get(exitName))) {
@@ -62,7 +63,6 @@ public class BoundsMapper extends MapWalker {
                             break;
                     }
                 }
-
             }
         }
     }
