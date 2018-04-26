@@ -10,7 +10,7 @@ public class Critter extends Thing implements Lootable, Mob {
     // Current health of this Mob.
     private int health;
     // Default health (used if alive is set back to true).
-    private int MAX_HEALTH = 10;
+    private static final int MAX_HEALTH = 10;
 
     /**
      * Critter - A non-player Lootable Mob.

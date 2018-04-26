@@ -29,7 +29,8 @@ public class Explorer extends Player {
      * @param longDescription A more detailed description for the Explorer
      * @param health Starting health for the Explorer.
      */
-    public Explorer(String shortDescription, String longDescription, int health) {
+    public Explorer(String shortDescription, String longDescription, 
+            int health) {
         super(shortDescription, longDescription, health);
     }
 

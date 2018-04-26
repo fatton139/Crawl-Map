@@ -28,8 +28,8 @@ public abstract class Thing implements Serializable {
      * @param longDescription  A more detailed description for the Thing
      */
     public Thing(String shortDescription, String longDescription) {
-        this.shortDescription=replaceDescription(shortDescription);
-        this.longDescription=replaceDescription(longDescription);
+        this.shortDescription = replaceDescription(shortDescription);
+        this.longDescription = replaceDescription(longDescription);
     }
 
     /**

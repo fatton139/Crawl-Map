@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Building block for the map. Contains {@link Thing Thing}s Note: all exit labels are case sensitive.
+ * Building block for the map. Contains {@link Thing Thing}s Note: all exit 
+ * labels are case sensitive.
  *
  * @author JF
  * @serial exclude
