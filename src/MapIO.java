@@ -2,6 +2,23 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class MapIO {
+    public static Thing decodeThing(String encoded, Room root) {
+        if (encoded == null || root == null)
+            return null;
+        switch(encoded.substring(0, 2)) {
+            case("$;"):
+                return Treasure.decode(encoded);
+            case("C;"):
+                return Critter.decode(encoded);
+            case("B;"):
+                return Builder.decode(encoded, root);
+            case("E;"):
+                return Explorer.decode(encoded);
+            default:
+                return null;
+        }
+    }
+
     public static Room deserializeMap(String filename) {
         ObjectInputStream room_in = null;
         try {
