@@ -53,4 +53,13 @@ public class Explorer extends Player {
         return "E;" + Integer.toString(this.getHealth()) + ";" + this
                 .getShort() + ";" + this.getLong();
     }
+
+    public static Explorer decode(String encoded) {
+        if (encoded == null || !encoded.startsWith("E;"))
+            return null;
+        String[] args = encoded.split(";");
+        if (args.length != 4)
+            return null;
+        return new Explorer(args[2], args[3], Integer.parseInt(args[1]));
+    }
 }

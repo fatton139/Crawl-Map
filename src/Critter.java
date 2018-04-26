@@ -120,4 +120,14 @@ public class Critter extends Thing implements Lootable, Mob {
                 Integer.toString(this.getHealth()) + ";" +
                 this.getShort() + ";" + this.getLong();
     }
+
+    public static Critter decode(String encoded) {
+        if (encoded == null || !encoded.startsWith("C;"))
+            return null;
+        String[] args = encoded.split(";");
+        if (args.length != 5)
+            return null;
+        return new Critter(args[3], args[4], Double.parseDouble("14.5"),
+                Integer.parseInt(args[2]));
+    }
 }

@@ -41,6 +41,15 @@ public class Builder extends Player {
     }
 
     public String repr() {
-        return "B;" + this.getShort() + ";" + this.getLong() ;
+        return "B;" + this.getShort() + ";" + this.getLong();
+    }
+
+    public static Builder decode(String encoded, Room root) {
+        if (encoded == null || root == null || !encoded.startsWith("B;"))
+            return null;
+        String[] args = encoded.split(";");
+        if (args.length != 3)
+            return null;
+        return new Builder(args[1], args[2], root);
     }
 }

@@ -42,4 +42,13 @@ public class Treasure extends Thing implements Lootable {
     public String repr() {
         return "$;" + Double.toString(this.value) + ";" + this.getShort() ;
     }
+
+    public static Treasure decode(String encoded) {
+        if (encoded == null || !encoded.startsWith("$;"))
+            return null;
+        String[] args = encoded.split(";");
+        if (args.length != 3)
+            return null;
+        return new Treasure(args[2], Double.parseDouble(args[1]));
+    }
 }
