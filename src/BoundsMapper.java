@@ -1,8 +1,8 @@
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class BoundsMapper extends MapWalker {
-    public Map<Room, Pair> coords = new HashMap<>();
+    public Map<Room, Pair> coords = new LinkedHashMap<>();
     public int xMin;
     public int xMax;
     public int yMin;
@@ -70,7 +70,7 @@ public class BoundsMapper extends MapWalker {
     @Override
     public void reset() {
         super.reset();
-        this.coords = new HashMap<>();
+        this.coords = new LinkedHashMap<>();
         this.xMax = 0;
         this.yMax = 0;
         this.xMin = 0;
