@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.io.*;
-import java.util.LinkedList;
-import java.util.Set;
 
 public class MapIO {
     public static Room deserializeMap(String filename) {
@@ -11,10 +9,8 @@ public class MapIO {
             room_in = new ObjectInputStream(f_in);
             return (Room) room_in.readObject();
         } catch (IOException e) {
-            System.out.println(e);
             return null;
         } catch (ClassNotFoundException e) {
-            System.out.println(e);
             return null;
         } finally {
             try {
@@ -26,7 +22,7 @@ public class MapIO {
     }
     public static boolean saveMap(Room root, String filename) {
         FileWriter file;
-        BufferedWriter BW = null;
+        BufferedWriter BW;
         BoundsMapper BM = new BoundsMapper(root);
         BM.walk();
         ArrayList<Room> rooms = new ArrayList<>(BM.coords.keySet());
@@ -64,12 +60,14 @@ public class MapIO {
             }
         } catch (IOException e) {
             return false;
-        } finally {
-            try {
-                if (BW != null)
-                    BW.close();
-            } catch (IOException e) { return false; }
         }
+
+        try {
+            BW.close();
+        } catch (IOException e) {
+            return false;
+        }
+
         return true;
     }
 
@@ -83,13 +81,14 @@ public class MapIO {
             return false;
         } catch (IOException e) {
             return false;
-        } finally {
-            try {
-                room_out.close();
-            } catch (IOException e) {
-                return false;
-            }
         }
+
+        try {
+            room_out.close();
+        } catch (IOException e) {
+            return false;
+        }
+
         return true;
     }
 }
