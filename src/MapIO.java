@@ -20,6 +20,49 @@ public class MapIO {
             }
         }
     }
+
+    public static Object[] loadMap(String filename) {
+        FileReader file;
+        BufferedReader BR;
+        Object[] returns = new Object[2];
+        try {
+            file = new FileReader(filename);
+            BR = new BufferedReader(file);
+            String line;
+            int counter = 0;
+            while ((line = BR.readLine()) != null) {
+                if (counter == 2)
+                    returns[0] = new Room(line);
+                if (line.startsWith("E;") || line.startsWith("B;")) {
+                    String[] args = line.split(";");
+                    if ((line.startsWith("E;") && args.length != 4) ||
+                            (line.startsWith("B;") && args.length != 3))
+                        return null;
+                    if (returns[1] == null) {
+                        returns[1] = line.startsWith("E;") ?
+                                new Explorer(args[2], args[3],
+                                        Integer.parseInt(args[1])) :
+                                new Builder(args[1], args[2],
+                                        (Room) returns[0]);
+                    }
+                    else
+                        return null;
+                }
+                counter++;
+            }
+        } catch (IOException e) {
+            return null;
+        }
+
+        try {
+            BR.close();
+        } catch (IOException e) {
+            return null;
+        }
+
+        return returns;
+    }
+
     public static boolean saveMap(Room root, String filename) {
         FileWriter file;
         BufferedWriter BW;
