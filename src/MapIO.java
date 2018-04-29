@@ -3,7 +3,7 @@ import java.io.*;
 
 public class MapIO {
     public static Thing decodeThing(String encoded, Room root) {
-        if (encoded == null || root == null)
+        if (encoded == null || encoded.length() < 2)
             return null;
         switch(encoded.substring(0, 2)) {
             case("$;"):
