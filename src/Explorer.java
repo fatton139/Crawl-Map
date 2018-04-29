@@ -49,11 +49,20 @@ public class Explorer extends Player {
         return 1;
     }
 
+    /**
+     * Gets the encoded representation.
+     * @return an encoded string.
+     */
     public String repr() {
         return "E;" + Integer.toString(this.getHealth()) + ";" + this
                 .getShort() + ";" + this.getLong();
     }
 
+    /**
+     * Factory to create Explorer from a String
+     * @param encoded repr() form of the object
+     * @return decoded Object or null for failure
+     */
     public static Explorer decode(String encoded) {
         if (encoded == null || !encoded.startsWith("E;"))
             return null;

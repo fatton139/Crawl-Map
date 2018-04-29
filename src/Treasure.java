@@ -39,10 +39,19 @@ public class Treasure extends Thing implements Lootable {
         return looter instanceof Player;
     }
 
+    /**
+     * Gets the encoded representation.
+     * @return an encoded string.
+     */
     public String repr() {
         return "$;" + Double.toString(this.value) + ";" + this.getShort() ;
     }
 
+    /**
+     * Factory to create Treasure from a String
+     * @param encoded repr() form of the object
+     * @return decoded Object or null for failure
+     */
     public static Treasure decode(String encoded) {
         if (encoded == null || !encoded.startsWith("$;"))
             return null;

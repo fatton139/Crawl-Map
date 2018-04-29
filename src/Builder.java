@@ -40,10 +40,20 @@ public class Builder extends Player {
     public void takeDamage(int amount) {
     }
 
+    /**
+     * Gets the encoded representation.
+     * @return an encoded string.
+     */
     public String repr() {
         return "B;" + this.getShort() + ";" + this.getLong();
     }
 
+    /**
+     * Factory to create Builder from a String
+     * @param encoded repr() form of the object
+     * @param root Start room for this map
+     * @return decoded Object or null for failure
+     */
     public static Builder decode(String encoded, Room root) {
         if (encoded == null || root == null || !encoded.startsWith("B;"))
             return null;

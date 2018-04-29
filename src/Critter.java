@@ -115,12 +115,21 @@ public class Critter extends Thing implements Lootable, Mob {
         return health;
     }
 
+    /**
+     * Gets the encoded representation.
+     * @return an encoded string.
+     */
     public String repr() {
         return "C;" + Double.toString(this.value) + ";" +
                 Integer.toString(this.getHealth()) + ";" +
                 this.getShort() + ";" + this.getLong();
     }
 
+    /**
+     * Factory to create Critter from a String
+     * @param encoded repr() form of the object
+     * @return decoded Object or null for failure
+     */
     public static Critter decode(String encoded) {
         if (encoded == null || !encoded.startsWith("C;"))
             return null;
