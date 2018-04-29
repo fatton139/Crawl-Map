@@ -48,22 +48,22 @@ public class MapIO {
             String line;
             int counter = 0;
             while ((line = BR.readLine()) != null) {
-                if (counter == 2)
-                    returns[0] = new Room(line);
+                if (counter == 1)
+                    returns[1] = new Room(line);
                 if (line.startsWith("E;") || line.startsWith("B;")) {
                     String[] args = line.split(";");
                     if ((line.startsWith("E;") && args.length != 4) ||
                             (line.startsWith("B;") && args.length != 3))
                         return null;
-                    if (returns[1] == null) {
-                        returns[1] = line.startsWith("E;") ?
-                                new Explorer(args[2], args[3],
-                                        Integer.parseInt(args[1])) :
-                                new Builder(args[1], args[2],
-                                        (Room) returns[0]);
+                    if (returns[0] == null) {
+                        returns[0] = line.startsWith("E;") ?
+                                Explorer.decode(line) :
+                                Builder.decode(line, (Room) returns[0]);
                     }
                     else
                         return null;
+                } else if (line.startsWith("$;") || line.startsWith("C;")) {
+                    ((Room) returns[1]).enter(MapIO.decodeThing(line, null));
                 }
                 counter++;
             }
