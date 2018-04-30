@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.io.*;
+import java.util.LinkedHashMap;
 
 public class MapIO {
     public static Thing decodeThing(String encoded, Room root) {
@@ -45,38 +46,70 @@ public class MapIO {
         try {
             file = new FileReader(filename);
             BR = new BufferedReader(file);
+            ArrayList<Room> roomIndex = new ArrayList<>();
             String line;
+            int roomIndexCursor = 0;
+            int numRooms = 0;
             int counter = 0;
             while ((line = BR.readLine()) != null) {
-                if (counter == 1)
-                    returns[1] = new Room(line);
-                if (line.startsWith("E;") || line.startsWith("B;")) {
-                    String[] args = line.split(";");
-                    if ((line.startsWith("E;") && args.length != 4) ||
-                            (line.startsWith("B;") && args.length != 3))
-                        return null;
-                    if (returns[0] == null) {
-                        returns[0] = line.startsWith("E;") ?
-                                Explorer.decode(line) :
-                                Builder.decode(line, (Room) returns[0]);
+                if (counter == 0)
+                    numRooms = Integer.parseInt(line);
+                else if (counter < numRooms + 1 && counter >= 1) {
+                    roomIndex.add(new Room(line));
+                } else {
+                    if (roomIndexCursor < numRooms) {
+                        int i = 0;
+                        while (i < Integer.parseInt(line)) {
+                            String encoded = BR.readLine();
+                            int roomIndexPointer = Integer.parseInt(encoded
+                                    .substring(0, encoded.indexOf(" ")));
+                            String exitName = encoded.substring(encoded
+                                    .indexOf(" ") + 1, encoded.length());
+                            try {
+                                roomIndex.get(roomIndexCursor).addExit(exitName,
+                                        roomIndex.get(roomIndexPointer));
+                            } catch(ExitExistsException e) {
+                                return null;
+                            } catch(NullRoomException e) {
+                                return null;
+                            }
+                            i++;
+                        }
+                    } else {
+                        int k = 0;
+                        while (k < Integer.parseInt(line)) {
+                            String encoded = BR.readLine();
+                            if (encoded.startsWith("E;") ||
+                                    encoded.startsWith("B;")) {
+                                if (returns[0] == null) {
+                                    returns[0] = encoded.startsWith("E;") ?
+                                            Explorer.decode(encoded) :
+                                            Builder.decode(encoded,
+                                                    roomIndex.get(0));
+                                } else
+                                    return null;
+
+                            } else {
+                                roomIndex.get(roomIndexCursor - numRooms)
+                                        .enter(MapIO.decodeThing(encoded,
+                                                roomIndex.get(0)));
+                            }
+                            k++;
+                        }
                     }
-                    else
-                        return null;
-                } else if (line.startsWith("$;") || line.startsWith("C;")) {
-                    ((Room) returns[1]).enter(MapIO.decodeThing(line, null));
+                    roomIndexCursor++;
                 }
                 counter++;
             }
+            returns[1] = roomIndex.get(0);
         } catch (IOException e) {
             return null;
         }
-
         try {
             BR.close();
         } catch (IOException e) {
             return null;
         }
-
         return returns;
     }
 
