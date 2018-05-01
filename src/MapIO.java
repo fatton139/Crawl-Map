@@ -134,7 +134,7 @@ public class MapIO {
             for (Room room:rooms) {
                 BW.write(Integer.toString(room.getExits().keySet().size()));
                 BW.newLine();
-                for (String exit: room.getExits().keySet()) {
+                for (String exit:room.getExits().keySet()) {
                     BW.write(Integer.toString(rooms.indexOf(room.getExits().get
                             (exit))));
                     BW.write(" ");
@@ -165,7 +165,7 @@ public class MapIO {
     }
 
     public static boolean serializeMap(Room root, String filename) {
-        ObjectOutputStream room_out = null;
+        ObjectOutputStream room_out;
         try {
             FileOutputStream file_out = new FileOutputStream(filename);
             room_out = new ObjectOutputStream(file_out);
