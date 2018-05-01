@@ -1,16 +1,29 @@
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Finds the bounding box for the overall map
+ */
 public class BoundsMapper extends MapWalker {
     public Map<Room, Pair> coords = new LinkedHashMap<>();
     public int xMin;
     public int xMax;
     public int yMin;
     public int yMax;
+
+    /**
+     * Constructor.
+     * @param root The starting Room
+     */
     public BoundsMapper(Room root) {
         super(root);
     }
 
+    /**
+     * Checks whether if a room has neighbours with known coordinates
+     * @param room the room to check
+     * @return whether if the room has neighours with known coordinates
+     */
     private boolean hasVisitedNeighbours(Room room) {
         for (String key:room.getExits().keySet()) {
             if (coords.containsKey(room.getExits().get(key))) {
@@ -20,6 +33,10 @@ public class BoundsMapper extends MapWalker {
         return false;
     }
 
+    /**
+     * Visits a room and assigns it a coordinate relative to a neighbour
+     * @param room the room to visit
+     */
     @Override
     protected void visit(Room room) {
         if (!hasVisitedNeighbours(room))
@@ -67,6 +84,9 @@ public class BoundsMapper extends MapWalker {
         }
     }
 
+    /**
+     * Clears any state from previous walks
+     */
     @Override
     public void reset() {
         super.reset();
