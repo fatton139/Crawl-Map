@@ -69,6 +69,10 @@ public class Explorer extends Player {
         String[] args = encoded.split(";");
         if (args.length != 4)
             return null;
-        return new Explorer(args[2], args[3], Integer.parseInt(args[1]));
+        try {
+            return new Explorer(args[2], args[3], Integer.parseInt(args[1]));
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }

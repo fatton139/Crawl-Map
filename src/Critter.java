@@ -136,7 +136,12 @@ public class Critter extends Thing implements Lootable, Mob {
         String[] args = encoded.split(";");
         if (args.length != 5)
             return null;
-        return new Critter(args[3], args[4], Double.parseDouble("14.5"),
-                Integer.parseInt(args[2]));
+        try {
+            return new Critter(args[3], args[4], Double.parseDouble("14.5"),
+                    Integer.parseInt(args[2]));
+
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }

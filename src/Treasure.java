@@ -58,6 +58,10 @@ public class Treasure extends Thing implements Lootable {
         String[] args = encoded.split(";");
         if (args.length != 3)
             return null;
-        return new Treasure(args[2], Double.parseDouble(args[1]));
+        try {
+            return new Treasure(args[2], Double.parseDouble(args[1]));
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }
